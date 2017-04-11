@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="logging" class="org.compassit.service.Logging" />
+	<bean id="transaction" class="org.compassit.service.Transaction" />
+	<bean id="security" class="org.compassit.service.Security" />
+	<bean id="account" class="org.compassit.account.Account" />
+	<bean id="employee" class="org.compassit.account.Employee">
+		<constructor-arg name="eid" value="99" />
+		<constructor-arg name="name" value="dhiraj" />
+		<constructor-arg name="email" value="dhiraj@compassites" />
+		<constructor-arg name="phone" value="9988787988" />
+	</bean>
+
+
+
+	<aop:config>
+		<aop:pointcut id="PC1"
+			expression="execution(String org.compassit.account.Account.deposit (..))" />
+		<aop:pointcut id="PC2"
+			expression="execution(* org.compassit.account.Account.with* (..))" />
+		<aop:pointcut id="PC3"
+			expression="execution(* org.compassit.account.Account.request* (..))" />
+		<aop:pointcut id="PC4"
+			expression="execution(* org.compassit.account.Account.trans* (..))" />
+
+
+		<aop:aspect id="logging" ref="logging">
+			<aop:before method="logStarts" pointcut-ref="PC1" />
+			<aop:after-returning method="logEnds"
+				pointcut-ref="PC1" />
+		</aop:aspect>
+
+		<aop:aspect ref="security">
+			<aop:before method="verifyUser" pointcut-ref="PC1" />
+			<aop:before method="userAuthenticated" pointcut-ref="PC1" />
+			<!-- <aop:after-returning method="userAuthenticated" pointcut-ref="PC1" 
+				/> -->
+
+
+		</aop:aspect>
+		<aop:aspect ref="transaction">
+			<aop:before method="transactionBegins" pointcut-ref="PC1" />
+			<aop:after-returning method="transactionCommit"
+				pointcut-ref="PC1" />
+			<aop:after-throwing method="transactionRollback"
+				pointcut-ref="PC1" />
+		</aop:aspect>
+	</aop:config>
+</beans>

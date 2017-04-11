@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="aobj" class="com.spring.beans.A" scope="prototype">
+		<property name="id" value="99" />
+		<property name="name" value="compassites"></property>
+	</bean>
+	<bean id="test" class="com.spring.beans.Test" scope="singleton">
+		<property name="a" ref="aobj"></property>
+	</bean>
+
+
+
+
+</beans>
