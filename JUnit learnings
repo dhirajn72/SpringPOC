@@ -1,0 +1,5 @@
+By SUT, or System Under Test, we understand the part of the system being tested. Depending on the
+type of test, SUT may be of very different granularity – from a single class to a whole application. A
+DOC, or Depended On Component, is any entity that is required by an SUT to fulfill its duties. Usually
+a DOC is of the same granularity as the SUT, e.g. if the SUT is a class, then it uses other classes, if it
+is a module, then it collaborates with other modules.

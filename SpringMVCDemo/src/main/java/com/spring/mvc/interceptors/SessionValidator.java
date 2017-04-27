@@ -4,21 +4,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.spring.mvc.controllers.LoginController;
 
 public class SessionValidator extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		HttpSession session = request.getSession();
-		if (!(((HandlerMethod) handler).getBean() instanceof LoginController)) {
-			if (session == null || session.getAttribute("MEMBER") == null) {
-				throw new Exception("Invalid session please login");
-			}
+
+		System.out.println("preHandle() called");
+		HttpSession session = request.getSession(false);
+		System.out.println(session);
+
+		/*if (session != null) {
+			session.setMaxInactiveInterval(5);
+		}*/
+
+		if (session == null || session.isNew()) {
+			// response.sendRedirect("/error.jsp");
+			request.getRequestDispatcher("/error.jsp").forward(request, response);
 		}
 		return true;
 	}

@@ -30,6 +30,11 @@ public class LoginController {
 		LoginCommand command = new LoginCommand();
 		model.put("loginCommand", command);
 		request.setAttribute("model", model);
+
+		/*if (request.getSession(false) == null) {
+			return "error";
+		}*/
+
 		return "login";
 	}
 
