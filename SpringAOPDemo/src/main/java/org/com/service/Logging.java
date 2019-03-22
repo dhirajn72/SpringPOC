@@ -1,7 +1,7 @@
-package org.compassit.service;
+package org.com.service;
 
 import org.aspectj.lang.JoinPoint;
-import org.compassit.account.Account;
+import org.com.account.Account;
 
 public class Logging {
 

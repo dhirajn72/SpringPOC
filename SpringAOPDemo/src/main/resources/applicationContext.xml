@@ -7,11 +7,11 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<bean id="logging" class="org.compassit.service.Logging" />
-	<bean id="transaction" class="org.compassit.service.Transaction" />
-	<bean id="security" class="org.compassit.service.Security" />
-	<bean id="account" class="org.compassit.account.Account" />
-	<bean id="employee" class="org.compassit.account.Employee">
+	<bean id="logging" class="org.com.service.Logging" />
+	<bean id="transaction" class="org.com.service.Transaction" />
+	<bean id="security" class="org.com.service.Security" />
+	<bean id="account" class="org.com.account.Account" />
+	<bean id="employee" class="org.com.account.Employee">
 		<constructor-arg name="eid" value="99" />
 		<constructor-arg name="name" value="dhiraj" />
 		<constructor-arg name="email" value="dhiraj@compassites" />
@@ -22,13 +22,13 @@
 
 	<aop:config>
 		<aop:pointcut id="PC1"
-			expression="execution(String org.compassit.account.Account.deposit (..))" />
+			expression="execution(String org.com.account.Account.deposit (..))" />
 		<aop:pointcut id="PC2"
-			expression="execution(* org.compassit.account.Account.with* (..))" />
+			expression="execution(* org.com.account.Account.with* (..))" />
 		<aop:pointcut id="PC3"
-			expression="execution(* org.compassit.account.Account.request* (..))" />
+			expression="execution(* org.com.account.Account.request* (..))" />
 		<aop:pointcut id="PC4"
-			expression="execution(* org.compassit.account.Account.trans* (..))" />
+			expression="execution(* org.com.account.Account.trans* (..))" />
 
 
 		<aop:aspect id="logging" ref="logging">

@@ -1,4 +1,4 @@
-package org.compassit.account;
+package org.com.account;
 
 public class Employee {
 

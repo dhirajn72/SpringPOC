@@ -1,4 +1,4 @@
-package org.compassit.service;
+package org.com.service;
 
 public class Security {
 	public void verifyUser() {
